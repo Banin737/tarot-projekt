@@ -16,7 +16,7 @@
     "db:migrate": "prisma migrate deploy",
     "db:migrate:dev": "prisma migrate dev",
     "db:generate": "prisma generate",
-    "db:seed": "ts-node --swc prisma/seed.ts",
+    "db:seed": "ts-node --swc -r dotenv/config prisma/seed.ts",
     "prepare": "husky install",
     "postinstall": "prisma generate"
   },
@@ -46,6 +46,7 @@
     "@commitlint/config-conventional": "^19.8.1",
     "@eslint/eslintrc": "^3",
     "@playwright/test": "^1.55.0",
+    "@swc/core": "^1.13.5",
     "@tailwindcss/postcss": "^4",
     "@testing-library/jest-dom": "^6.8.0",
     "@testing-library/react": "^16.3.0",

@@ -1,8 +1,10 @@
 import { PrismaClient, LayoutType, ArcanaType, ArtifactCategory, SpreadRole, QuestionnaireInputType } from "@prisma/client";
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
 
 const prisma = new PrismaClient();
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 type RawCardMeaning = {
   card_id: string;
@@ -542,6 +544,7 @@ const upsertSections = async () => {
             descriptionKey: subcategory.descriptionKey,
             templates: {
               create: subcategory.templates.map((template) => ({
+                sectionId: section.id,
                 id: template.id,
                 slug: template.slug,
                 titleKey: template.titleKey,
@@ -737,3 +740,8 @@ const main = async () => {
 };
 
 void main();
+
+
+
+
+
