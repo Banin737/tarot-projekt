@@ -1,4 +1,4 @@
-import { computeBasePolarity } from "./basePolarity";
+п»їimport { computeBasePolarity } from "./basePolarity";
 import { computeMajorInfluence } from "./majorInfluence";
 import { computePositionModifier } from "./positionModifier";
 import { computeQuestionnaireModifier } from "./questionnaireModifier";
@@ -23,6 +23,7 @@ const computeOrientationFactor = (card: EngineCardInput, polarityBase: number): 
       type: "orientation",
     };
   }
+
   return {
     id: `${card.cardId}-orientation`,
     label: "orientation:upright",
@@ -31,14 +32,27 @@ const computeOrientationFactor = (card: EngineCardInput, polarityBase: number): 
   };
 };
 
-const summariseOutlook = (score: number): { outlook: SpreadInterpretation["outlook"]; summary: string } => {
+const summariseOutlook = (
+  score: number,
+): { outlook: SpreadInterpretation["outlook"]; summary: string } => {
   if (score > 0.6) {
-    return { outlook: "positive", summary: "Позитивный вектор, раскрываются возможности." };
+    return {
+      outlook: "positive",
+      summary: "РџРѕР·РёС‚РёРІРЅС‹Р№ РІРµРєС‚РѕСЂ, СЂР°СЃРєСЂС‹РІР°СЋС‚СЃСЏ РІРѕР·РјРѕР¶РЅРѕСЃС‚Рё.",
+    };
   }
-  if (score < -0.2) {
-    return { outlook: "caution", summary: "Повышенное внимание: проявления напряжения требуют действий." };
+
+  if (score < -0.3) {
+    return {
+      outlook: "caution",
+      summary: "РџРѕРІС‹С€РµРЅРЅРѕРµ РІРЅРёРјР°РЅРёРµ: РїСЂРѕСЏРІР»РµРЅРёСЏ РЅР°РїСЂСЏР¶РµРЅРёСЏ С‚СЂРµР±СѓСЋС‚ РґРµР№СЃС‚РІРёР№.",
+    };
   }
-  return { outlook: "neutral", summary: "Нейтральная динамика, многое зависит от ваших решений." };
+
+  return {
+    outlook: "neutral",
+    summary: "РќРµР№С‚СЂР°Р»СЊРЅР°СЏ РґРёРЅР°РјРёРєР°, РјРЅРѕРіРѕРµ Р·Р°РІРёСЃРёС‚ РѕС‚ РІР°С€РёС… СЂРµС€РµРЅРёР№.",
+  };
 };
 
 const buildAdvice = (cards: CardInterpretationResult[]): string => {
@@ -70,7 +84,7 @@ export const interpretSpread = (context: SpreadContext): SpreadInterpretation =>
     const polarityScore = clamp(
       contributions.reduce((acc, factor) => acc + factor.value, 0),
       -2,
-        2,
+      2,
     );
     const meaning = card.isReversed || polarityScore < 0 ? card.meaningRev : card.meaningUp;
 
@@ -90,8 +104,17 @@ export const interpretSpread = (context: SpreadContext): SpreadInterpretation =>
     } satisfies CardInterpretationResult;
   });
 
-  const totalScore = cardResults.reduce((acc, card) => acc + card.polarityScore, 0) / Math.max(cardResults.length, 1);
+  const totalScore =
+    cardResults.reduce((acc, card) => acc + card.polarityScore, 0) / Math.max(cardResults.length, 1);
+
   const { outlook, summary } = summariseOutlook(totalScore);
+  const hasStrongNegative = cardResults.some((card) => card.polarityScore <= -0.5);
+  const finalOutlook: SpreadInterpretation["outlook"] = hasStrongNegative && totalScore < 0 ? "caution" : outlook;
+  const finalSummary =
+    hasStrongNegative && totalScore < 0
+      ? "РџРѕРІС‹С€РµРЅРЅРѕРµ РІРЅРёРјР°РЅРёРµ: РїСЂРѕСЏРІР»РµРЅРёСЏ РЅР°РїСЂСЏР¶РµРЅРёСЏ С‚СЂРµР±СѓСЋС‚ РґРµР№СЃС‚РІРёР№."
+      : summary;
+
   const advice = buildAdvice(cardResults);
 
   const factorList = cardResults
@@ -107,15 +130,10 @@ export const interpretSpread = (context: SpreadContext): SpreadInterpretation =>
 
   return {
     totalScore: parseFloat(totalScore.toFixed(3)),
-    outlook,
-    summary,
+    outlook: finalOutlook,
+    summary: finalSummary,
     advice,
     cards: cardResults,
     topFactors: factorList,
   } satisfies SpreadInterpretation;
 };
-
-
-
-
-

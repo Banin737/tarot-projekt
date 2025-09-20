@@ -1,4 +1,4 @@
-import { cookies } from "next/headers";
+﻿import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import { SECTION_CONFIG } from "@/lib/constants/sections";
 import { QUESTIONNAIRES } from "@/lib/constants/questionnaires";
@@ -6,6 +6,7 @@ import { translate } from "@/lib/i18n/resources";
 import { QuestionnaireForm } from "@/components/questionnaire-form";
 
 const DEFAULT_LOCALE = "ru";
+type Locale = "ru" | "en";
 
 type PageProps = {
   params: Promise<{ section: string; subcategory: string }>;
@@ -24,7 +25,8 @@ export default async function QuestionnairePage({ params }: PageProps) {
     notFound();
   }
 
-  const locale = (cookies().get("locale")?.value ?? DEFAULT_LOCALE) as "ru" | "en";
+  const cookieStore = await cookies();
+  const locale = (cookieStore.get("locale")?.value ?? DEFAULT_LOCALE) as Locale;
 
   return (
     <main className="mx-auto flex max-w-3xl flex-col gap-8 px-6 py-12">

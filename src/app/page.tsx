@@ -1,21 +1,23 @@
-import Link from "next/link";
+п»їimport Link from "next/link";
 import { cookies } from "next/headers";
 import { SECTION_CONFIG } from "@/lib/constants/sections";
 import { translate } from "@/lib/i18n/resources";
 
 const DEFAULT_LOCALE = "ru";
+type Locale = "ru" | "en";
 
-export default function HomePage() {
-  const locale = (cookies().get("locale")?.value ?? DEFAULT_LOCALE) as "ru" | "en";
+export default async function HomePage() {
+  const cookieStore = await cookies();
+  const locale = (cookieStore.get("locale")?.value ?? DEFAULT_LOCALE) as Locale;
 
   return (
     <main className="mx-auto flex max-w-5xl flex-col gap-8 px-6 py-12">
       <header className="space-y-3 text-center">
         <h1 className="text-3xl font-semibold tracking-tight">
-          Tarot Quest - {translate(locale, "ui.exploreSections")}
+          Tarot Quest вЂ” {translate(locale, "ui.exploreSections")}
         </h1>
         <p className="text-sm text-slate-300">
-          Выбирайте тематический раздел, отвечайте на уточняющие вопросы и получайте объяснимые интерпретации.
+          Р’С‹Р±РёСЂР°Р№С‚Рµ С‚РµРјР°С‚РёС‡РµСЃРєРёР№ СЂР°Р·РґРµР», РѕС‚РІРµС‡Р°Р№С‚Рµ РЅР° СѓС‚РѕС‡РЅСЏСЋС‰РёРµ РІРѕРїСЂРѕСЃС‹ Рё РїРѕР»СѓС‡Р°Р№С‚Рµ РѕР±СЉСЏСЃРЅРёРјС‹Рµ РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёРё.
         </p>
       </header>
       <section className="grid gap-6 md:grid-cols-2">
@@ -25,11 +27,9 @@ export default function HomePage() {
             className="rounded-xl border border-white/10 bg-slate-900/70 p-6 shadow-lg shadow-purple-950/50"
           >
             <div className="flex items-center justify-between">
-              <h2 className="text-xl font-semibold">
-                {translate(locale, section.titleKey)}
-              </h2>
+              <h2 className="text-xl font-semibold">{translate(locale, section.titleKey)}</h2>
               <span className="text-xs uppercase text-purple-300">
-                {section.subcategories.length} сценариев
+                {section.subcategories.length} СЃС†РµРЅР°СЂРёРµРІ
               </span>
             </div>
             <ul className="mt-4 space-y-3">
@@ -37,12 +37,8 @@ export default function HomePage() {
                 <li key={subcategory.id} className="rounded-lg border border-white/5 bg-slate-800/60 p-4">
                   <div className="flex items-center justify-between gap-3">
                     <div>
-                      <p className="font-medium">
-                        {translate(locale, subcategory.titleKey)}
-                      </p>
-                      <p className="text-xs text-slate-400">
-                        {translate(locale, subcategory.descriptionKey)}
-                      </p>
+                      <p className="font-medium">{translate(locale, subcategory.titleKey)}</p>
+                      <p className="text-xs text-slate-400">{translate(locale, subcategory.descriptionKey)}</p>
                     </div>
                     <Link
                       className="rounded-full bg-purple-600 px-4 py-1 text-xs font-semibold uppercase text-white"

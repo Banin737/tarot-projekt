@@ -1,10 +1,12 @@
-"use client";
+п»ї"use client";
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import type { QuestionnaireField } from "@/lib/constants/questionnaires";
 import { translate } from "@/lib/i18n/resources";
 import { useTranslation } from "@/lib/i18n";
+
+type Locale = "ru" | "en";
 
 export type QuestionnaireFormProps = {
   templateId: string;
@@ -60,21 +62,23 @@ export const QuestionnaireForm = ({ templateId, fields }: QuestionnaireFormProps
       router.push(`/spreads/${sessionJson.sessionId}`);
     } catch (submitError) {
       console.error(submitError);
-      setError("Не удалось подготовить расклад. Попробуйте снова.");
+      setError("РќРµ СѓРґР°Р»РѕСЃСЊ РїРѕРґРіРѕС‚РѕРІРёС‚СЊ СЂР°СЃРєР»Р°Рґ. РџРѕРїСЂРѕР±СѓР№С‚Рµ СЃРЅРѕРІР°.");
     } finally {
       setSubmitting(false);
     }
   };
+
+  const currentLocale = (locale ?? "ru") as Locale;
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {fields.map((field) => (
         <div key={field.id} className="space-y-2">
           <label className="block text-sm font-medium text-slate-200" htmlFor={field.id}>
-            {translate(locale, field.labelKey)}
+            {translate(currentLocale, field.labelKey)}
           </label>
           {field.helperKey ? (
-            <p className="text-xs text-slate-400">{translate(locale, field.helperKey)}</p>
+            <p className="text-xs text-slate-400">{translate(currentLocale, field.helperKey)}</p>
           ) : null}
           {field.type === "select" && field.options ? (
             <select
@@ -89,7 +93,7 @@ export const QuestionnaireForm = ({ templateId, fields }: QuestionnaireFormProps
               </option>
               {field.options.map((option) => (
                 <option key={option.value} value={option.value}>
-                  {translate(locale, option.labelKey)}
+                  {translate(currentLocale, option.labelKey)}
                 </option>
               ))}
             </select>
@@ -111,7 +115,7 @@ export const QuestionnaireForm = ({ templateId, fields }: QuestionnaireFormProps
                         handleChange(field, next);
                       }}
                     />
-                    {translate(locale, option.labelKey)}
+                    {translate(currentLocale, option.labelKey)}
                   </label>
                 );
               })}
@@ -147,7 +151,7 @@ export const QuestionnaireForm = ({ templateId, fields }: QuestionnaireFormProps
         className="w-full rounded-md bg-purple-600 px-4 py-2 text-sm font-semibold text-white disabled:opacity-60"
         disabled={submitting}
       >
-        {submitting ? "Загрузка..." : translate(locale, "ui.beginSpread")}
+        {submitting ? "Р—Р°РіСЂСѓР·РєР°..." : translate(currentLocale, "ui.beginSpread")}
       </button>
     </form>
   );

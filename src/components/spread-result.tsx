@@ -1,18 +1,26 @@
-"use client";
+п»ї"use client";
 
 import { useEffect, useState } from "react";
 import type { InterpretResponse } from "@/lib/validation";
 import { translate } from "@/lib/i18n/resources";
 import { useTranslation } from "@/lib/i18n";
 
-export const SpreadResult = ({ sessionId }: { sessionId: string }) => {
+type Locale = "ru" | "en";
+
+type TabKey = "meaning" | "advice" | "factors";
+
+type SpreadResultProps = {
+  sessionId: string;
+};
+
+export const SpreadResult = ({ sessionId }: SpreadResultProps) => {
   const { locale } = useTranslation();
   const [data, setData] = useState<InterpretResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [tab, setTab] = useState<"meaning" | "advice" | "factors">("meaning");
+  const [tab, setTab] = useState<TabKey>("meaning");
 
   useEffect(() => {
-    const run = async () => {
+    const load = async () => {
       try {
         const response = await fetch("/api/interpret", {
           method: "POST",
@@ -26,11 +34,11 @@ export const SpreadResult = ({ sessionId }: { sessionId: string }) => {
         setData(json);
       } catch (fetchError) {
         console.error(fetchError);
-        setError("Не удалось получить интерпретацию");
+        setError("РќРµ СѓРґР°Р»РѕСЃСЊ РїРѕР»СѓС‡РёС‚СЊ РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёСЋ");
       }
     };
 
-    void run();
+    void load();
   }, [locale, sessionId]);
 
   if (error) {
@@ -38,8 +46,10 @@ export const SpreadResult = ({ sessionId }: { sessionId: string }) => {
   }
 
   if (!data) {
-    return <p className="text-sm text-slate-300">Загружаем интерпретацию...</p>;
+    return <p className="text-sm text-slate-300">Р—Р°РіСЂСѓР¶Р°РµРј РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёСЋ...</p>;
   }
+
+  const currentLocale = (locale ?? "ru") as Locale;
 
   return (
     <div className="space-y-6">
@@ -60,21 +70,21 @@ export const SpreadResult = ({ sessionId }: { sessionId: string }) => {
             className={`text-sm ${tab === "meaning" ? "font-semibold text-purple-300" : "text-slate-300"}`}
             onClick={() => setTab("meaning")}
           >
-            {translate(locale, "ui.meaningTab")}
+            {translate(currentLocale, "ui.meaningTab")}
           </button>
           <button
             type="button"
             className={`text-sm ${tab === "advice" ? "font-semibold text-purple-300" : "text-slate-300"}`}
             onClick={() => setTab("advice")}
           >
-            {translate(locale, "ui.adviceTab")}
+            {translate(currentLocale, "ui.adviceTab")}
           </button>
           <button
             type="button"
             className={`text-sm ${tab === "factors" ? "font-semibold text-purple-300" : "text-slate-300"}`}
             onClick={() => setTab("factors")}
           >
-            {translate(locale, "ui.factorsTab")}
+            {translate(currentLocale, "ui.factorsTab")}
           </button>
         </div>
         {tab === "meaning" ? (
@@ -105,7 +115,9 @@ export const SpreadResult = ({ sessionId }: { sessionId: string }) => {
           <ul className="mt-4 space-y-3">
             {data.topFactors.map((factor, index) => (
               <li key={`${factor.cardId}-${index}`} className="flex items-center justify-between rounded-lg border border-white/10 bg-slate-900/60 p-3">
-                <span className="text-sm text-slate-200">{factor.cardId} · {factor.label}</span>
+                <span className="text-sm text-slate-200">
+                  {factor.cardId} В· {factor.label}
+                </span>
                 <span className="text-sm font-semibold text-purple-200">{factor.value.toFixed(2)}</span>
               </li>
             ))}
