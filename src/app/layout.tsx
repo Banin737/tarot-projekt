@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { Geist, Geist_Mono } from "next/font/google";
 import { I18nProvider } from "@/lib/i18n";
@@ -15,18 +15,20 @@ const geistMono = Geist_Mono({
 });
 
 const DEFAULT_LOCALE = "ru";
+type Locale = "ru" | "en";
 
 export const metadata: Metadata = {
   title: "Tarot Quest",
   description: "Explainable tarot spreads with game economy",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const locale = (cookies().get("locale")?.value ?? DEFAULT_LOCALE) as "ru" | "en";
+  const cookieStore = await cookies();
+  const locale = (cookieStore.get("locale")?.value ?? DEFAULT_LOCALE) as Locale;
 
   return (
     <html lang={locale}>

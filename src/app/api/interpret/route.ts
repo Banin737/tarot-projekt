@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+﻿import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { interpretRequestSchema, interpretResponseSchema } from "@/lib/validation";
 import { interpretSpread } from "@/lib/tarot/engine";
@@ -104,31 +104,34 @@ export async function POST(request: Request) {
       }
     }
 
-    const cardInputs: EngineCardInput[] = session.draws
-      .map((draw) => {
-        const meaning = meaningRecords.find((record) => record.cardId === draw.cardId);
-        if (!meaning) return null;
-        return {
-          cardId: draw.cardId,
-          cardName: draw.card.name,
-          arcana: draw.card.arcana,
-          isMajor: draw.card.isMajor,
-          basePolarity: meaning.basePolarity,
-          layoutType: meaning.layoutType,
-          meaningUp: meaning.meaningUp,
-          meaningRev: meaning.meaningRev,
-          advicePotential: meaning.advicePotential,
-          notes: meaning.notes,
-          tags: meaning.meaningTags.map((tag) => tag.tag),
-          position: {
-            index: draw.position.index,
-            role: draw.position.role,
-            polarityWeight: draw.position.polarityWeight,
-          },
-          isReversed: draw.isReversed,
-        } satisfies EngineCardInput;
-      })
-      .filter((card): card is EngineCardInput => Boolean(card));
+    const cardInputs: EngineCardInput[] = [];
+
+    for (const draw of session.draws) {
+      const meaning = meaningRecords.find((record) => record.cardId === draw.cardId);
+      if (!meaning) {
+        continue;
+      }
+
+      cardInputs.push({
+        cardId: draw.cardId,
+        cardName: draw.card.name,
+        arcana: draw.card.arcana,
+        isMajor: draw.card.isMajor,
+        basePolarity: meaning.basePolarity,
+        layoutType: meaning.layoutType,
+        meaningUp: meaning.meaningUp,
+        meaningRev: meaning.meaningRev,
+        advicePotential: meaning.advicePotential,
+        notes: meaning.notes,
+        tags: meaning.meaningTags.map((tag) => tag.tag),
+        position: {
+          index: draw.position.index,
+          role: draw.position.role,
+          polarityWeight: draw.position.polarityWeight,
+        },
+        isReversed: draw.isReversed,
+      });
+    }
 
     const interpretation = interpretSpread({
       cards: cardInputs,
