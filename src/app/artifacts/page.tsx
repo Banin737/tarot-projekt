@@ -1,11 +1,13 @@
-import { ARTIFACTS } from "@/lib/constants/artifacts";
+﻿import { ARTIFACTS } from "@/lib/constants/artifacts";
 import { cookies } from "next/headers";
 import { translate } from "@/lib/i18n/resources";
 
 const DEFAULT_LOCALE = "ru";
+type Locale = "ru" | "en";
 
-export default function ArtifactsPage() {
-  const locale = (cookies().get("locale")?.value ?? DEFAULT_LOCALE) as "ru" | "en";
+export default async function ArtifactsPage() {
+  const cookieStore = await cookies();
+  const locale = (cookieStore.get("locale")?.value ?? DEFAULT_LOCALE) as Locale;
 
   return (
     <main className="mx-auto flex max-w-5xl flex-col gap-6 px-6 py-12">
@@ -28,5 +30,3 @@ export default function ArtifactsPage() {
     </main>
   );
 }
-
-

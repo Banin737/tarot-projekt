@@ -1,4 +1,4 @@
-import { z } from "zod";
+﻿import { z } from "zod";
 
 export const ledgerSourceEnum = z.enum([
   "session",
@@ -13,7 +13,7 @@ export const ledgerEarnRequestSchema = z.object({
   sessionId: z.string().uuid().optional(),
   source: ledgerSourceEnum,
   amount: z.number().int(),
-  metadata: z.record(z.unknown()).optional(),
+  metadata: z.record(z.string(), z.unknown()).optional(),
 });
 
 export const ledgerEarnResponseSchema = z.object({

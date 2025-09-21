@@ -1,6 +1,6 @@
 ﻿export type Locale = "ru" | "en";
 
-type TranslationTree = Record<string, string | TranslationTree>;
+export interface TranslationTree { [key: string]: string | TranslationTree; }
 
 export const resources: Record<Locale, TranslationTree> = {
   ru: {

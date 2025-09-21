@@ -1,4 +1,4 @@
-import { LedgerEntryType } from "@prisma/client";
+﻿import { LedgerEntryType, Prisma } from "@prisma/client";
 import { prisma } from "../prisma";
 
 const BASE_SPREAD_LIMIT = 3;
@@ -72,7 +72,7 @@ export const recordLedgerEntry = async (
       amount: params.amount,
       balanceAfter,
       descriptionKey: params.descriptionKey,
-      metadata: params.metadata,
+      metadata: params.metadata as Prisma.InputJsonValue,
     },
   });
 
