@@ -1,4 +1,4 @@
-﻿import { cookies } from "next/headers";
+import { cookies } from "next/headers";
 import { translate } from "@/lib/i18n/resources";
 import { SpreadResult } from "@/components/spread-result";
 

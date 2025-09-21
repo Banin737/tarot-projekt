@@ -1,258 +1,262 @@
-﻿export type Locale = "ru" | "en";
+﻿import { DEFAULT_LOCALE, type SupportedLocale } from "./config";
 
-export interface TranslationTree { [key: string]: string | TranslationTree; }
+export interface TranslationTree {
+  [key: string]: string | TranslationTree;
+}
 
-export const resources: Record<Locale, TranslationTree> = {
+export type Locale = SupportedLocale;
+
+export const resources: Record<SupportedLocale, TranslationTree> = {
   ru: {
     common: {
-      friendship: "Дружба",
-      romance: "Романтика",
-      unsure: "Пока не уверена",
-      low: "Низкий",
-      medium: "Средний",
-      high: "Высокий",
-      shortTerm: "Ближайшее время",
-      midTerm: "Среднесрочно",
-      longTerm: "Долгосрочно",
-      savings: "Сбережения",
-      debt: "Долги",
-      invest: "Инвестиции",
-      urgent: "Срочно",
-      soon: "Скоро",
-      later: "Позже",
-      love: "Любовь",
-      work: "Работа",
-      health: "Здоровье"
+      friendship: "Р”СЂСѓР¶Р±Р°",
+      romance: "Р РѕРјР°РЅС‚РёРєР°",
+      unsure: "РџРѕРєР° РЅРµ СѓРІРµСЂРµРЅР°",
+      low: "РќРёР·РєРёР№",
+      medium: "РЎСЂРµРґРЅРёР№",
+      high: "Р’С‹СЃРѕРєРёР№",
+      shortTerm: "Р‘Р»РёР¶Р°Р№С€РµРµ РІСЂРµРјСЏ",
+      midTerm: "РЎСЂРµРґРЅРµСЃСЂРѕС‡РЅРѕ",
+      longTerm: "Р”РѕР»РіРѕСЃСЂРѕС‡РЅРѕ",
+      savings: "РЎР±РµСЂРµР¶РµРЅРёСЏ",
+      debt: "Р”РѕР»РіРё",
+      invest: "РРЅРІРµСЃС‚РёС†РёРё",
+      urgent: "РЎСЂРѕС‡РЅРѕ",
+      soon: "РЎРєРѕСЂРѕ",
+      later: "РџРѕР·Р¶Рµ",
+      love: "Р›СЋР±РѕРІСЊ",
+      work: "Р Р°Р±РѕС‚Р°",
+      health: "Р—РґРѕСЂРѕРІСЊРµ"
     },
     sections: {
       relationships: {
-        title: "Отношения",
+        title: "РћС‚РЅРѕС€РµРЅРёСЏ",
         newConnections: {
-          title: "Новые знакомства",
-          description: "Как будет развиваться новый контакт"
+          title: "РќРѕРІС‹Рµ Р·РЅР°РєРѕРјСЃС‚РІР°",
+          description: "РљР°Рє Р±СѓРґРµС‚ СЂР°Р·РІРёРІР°С‚СЊСЃСЏ РЅРѕРІС‹Р№ РєРѕРЅС‚Р°РєС‚"
         },
         longTerm: {
-          title: "Долгосрочные отношения",
-          description: "Диалог о будущем союза"
+          title: "Р”РѕР»РіРѕСЃСЂРѕС‡РЅС‹Рµ РѕС‚РЅРѕС€РµРЅРёСЏ",
+          description: "Р”РёР°Р»РѕРі Рѕ Р±СѓРґСѓС‰РµРј СЃРѕСЋР·Р°"
         }
       },
       career: {
-        title: "Деньги и работа",
+        title: "Р”РµРЅСЊРіРё Рё СЂР°Р±РѕС‚Р°",
         growth: {
-          title: "Рост и карьера",
-          description: "Следующий шаг в профессии"
+          title: "Р РѕСЃС‚ Рё РєР°СЂСЊРµСЂР°",
+          description: "РЎР»РµРґСѓСЋС‰РёР№ С€Р°Рі РІ РїСЂРѕС„РµСЃСЃРёРё"
         },
         financeBalance: {
-          title: "Финансовый баланс",
-          description: "Как сбалансировать бюджет"
+          title: "Р¤РёРЅР°РЅСЃРѕРІС‹Р№ Р±Р°Р»Р°РЅСЃ",
+          description: "РљР°Рє СЃР±Р°Р»Р°РЅСЃРёСЂРѕРІР°С‚СЊ Р±СЋРґР¶РµС‚"
         }
       },
       situations: {
-        title: "Разные ситуации",
+        title: "Р Р°Р·РЅС‹Рµ СЃРёС‚СѓР°С†РёРё",
         choice: {
-          title: "Сложный выбор",
-          description: "Помощь в принятии решения"
+          title: "РЎР»РѕР¶РЅС‹Р№ РІС‹Р±РѕСЂ",
+          description: "РџРѕРјРѕС‰СЊ РІ РїСЂРёРЅСЏС‚РёРё СЂРµС€РµРЅРёСЏ"
         }
       },
       forecast: {
-        title: "Прогностика",
+        title: "РџСЂРѕРіРЅРѕСЃС‚РёРєР°",
         weekly: {
-          title: "Неделя",
-          description: "Тенденции на семь дней"
+          title: "РќРµРґРµР»СЏ",
+          description: "РўРµРЅРґРµРЅС†РёРё РЅР° СЃРµРјСЊ РґРЅРµР№"
         }
       },
       personal: {
-        title: "Личные расклады",
+        title: "Р›РёС‡РЅС‹Рµ СЂР°СЃРєР»Р°РґС‹",
         selfCare: {
-          title: "Забота о себе",
-          description: "Эмоциональный тонус"
+          title: "Р—Р°Р±РѕС‚Р° Рѕ СЃРµР±Рµ",
+          description: "Р­РјРѕС†РёРѕРЅР°Р»СЊРЅС‹Р№ С‚РѕРЅСѓСЃ"
         }
       },
       pregnancy: {
-        title: "Беременность",
+        title: "Р‘РµСЂРµРјРµРЅРЅРѕСЃС‚СЊ",
         planning: {
-          title: "Планирование",
-          description: "Подготовка к появлению малыша"
+          title: "РџР»Р°РЅРёСЂРѕРІР°РЅРёРµ",
+          description: "РџРѕРґРіРѕС‚РѕРІРєР° Рє РїРѕСЏРІР»РµРЅРёСЋ РјР°Р»С‹С€Р°"
         }
       }
     },
     questionnaires: {
       newConnections: {
-        title: "О чём спросим перед раскладом?",
-        description: "Ответы помогут точнее подобрать интерпретации",
-        intent: { label: "Что хотите прояснить?" },
+        title: "Рћ С‡С‘Рј СЃРїСЂРѕСЃРёРј РїРµСЂРµРґ СЂР°СЃРєР»Р°РґРѕРј?",
+        description: "РћС‚РІРµС‚С‹ РїРѕРјРѕРіСѓС‚ С‚РѕС‡РЅРµРµ РїРѕРґРѕР±СЂР°С‚СЊ РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёРё",
+        intent: { label: "Р§С‚Рѕ С…РѕС‚РёС‚Рµ РїСЂРѕСЏСЃРЅРёС‚СЊ?" },
         frequency: {
-          label: "Как часто общаетесь?",
-          helper: "0 — редко, 10 — каждый день"
+          label: "РљР°Рє С‡Р°СЃС‚Рѕ РѕР±С‰Р°РµС‚РµСЃСЊ?",
+          helper: "0 вЂ” СЂРµРґРєРѕ, 10 вЂ” РєР°Р¶РґС‹Р№ РґРµРЅСЊ"
         }
       },
       longTerm: {
-        title: "Контекст отношений",
-        description: "Немного детализации",
-        conflict: { label: "Уровень напряжения" },
-        commitment: { label: "Готовность к шагу" }
+        title: "РљРѕРЅС‚РµРєСЃС‚ РѕС‚РЅРѕС€РµРЅРёР№",
+        description: "РќРµРјРЅРѕРіРѕ РґРµС‚Р°Р»РёР·Р°С†РёРё",
+        conflict: { label: "РЈСЂРѕРІРµРЅСЊ РЅР°РїСЂСЏР¶РµРЅРёСЏ" },
+        commitment: { label: "Р“РѕС‚РѕРІРЅРѕСЃС‚СЊ Рє С€Р°РіСѓ" }
       },
       jobGrowth: {
-        title: "Заявка на рост",
-        description: "Сфокусируем расклад",
-        industry: { label: "Сфера или роль" },
-        timeline: { label: "Горизонт ожиданий" }
+        title: "Р—Р°СЏРІРєР° РЅР° СЂРѕСЃС‚",
+        description: "РЎС„РѕРєСѓСЃРёСЂСѓРµРј СЂР°СЃРєР»Р°Рґ",
+        industry: { label: "РЎС„РµСЂР° РёР»Рё СЂРѕР»СЊ" },
+        timeline: { label: "Р“РѕСЂРёР·РѕРЅС‚ РѕР¶РёРґР°РЅРёР№" }
       },
       financeBalance: {
-        title: "Финансовый баланс",
-        description: "Уточним фокус",
-        pressure: { label: "Уровень стресса" },
-        priority: { label: "Главные приоритеты" }
+        title: "Р¤РёРЅР°РЅСЃРѕРІС‹Р№ Р±Р°Р»Р°РЅСЃ",
+        description: "РЈС‚РѕС‡РЅРёРј С„РѕРєСѓСЃ",
+        pressure: { label: "РЈСЂРѕРІРµРЅСЊ СЃС‚СЂРµСЃСЃР°" },
+        priority: { label: "Р“Р»Р°РІРЅС‹Рµ РїСЂРёРѕСЂРёС‚РµС‚С‹" }
       },
       choice: {
-        title: "Опишите выбор",
-        description: "Дайте немного контекста",
-        options: { label: "Сколько вариантов рассматриваете?" },
-        timeframe: { label: "Насколько срочно решение?" }
+        title: "РћРїРёС€РёС‚Рµ РІС‹Р±РѕСЂ",
+        description: "Р”Р°Р№С‚Рµ РЅРµРјРЅРѕРіРѕ РєРѕРЅС‚РµРєСЃС‚Р°",
+        options: { label: "РЎРєРѕР»СЊРєРѕ РІР°СЂРёР°РЅС‚РѕРІ СЂР°СЃСЃРјР°С‚СЂРёРІР°РµС‚Рµ?" },
+        timeframe: { label: "РќР°СЃРєРѕР»СЊРєРѕ СЃСЂРѕС‡РЅРѕ СЂРµС€РµРЅРёРµ?" }
       },
       weekly: {
-        title: "Фокус недели",
-        description: "Выберите приоритеты",
-        focus: { label: "Что важно?" }
+        title: "Р¤РѕРєСѓСЃ РЅРµРґРµР»Рё",
+        description: "Р’С‹Р±РµСЂРёС‚Рµ РїСЂРёРѕСЂРёС‚РµС‚С‹",
+        focus: { label: "Р§С‚Рѕ РІР°Р¶РЅРѕ?" }
       },
       selfCare: {
-        title: "Отметьте состояние",
-        description: "Поможет подсветить эмоциональные слои",
-        energy: { label: "Уровень энергии" }
+        title: "РћС‚РјРµС‚СЊС‚Рµ СЃРѕСЃС‚РѕСЏРЅРёРµ",
+        description: "РџРѕРјРѕР¶РµС‚ РїРѕРґСЃРІРµС‚РёС‚СЊ СЌРјРѕС†РёРѕРЅР°Р»СЊРЅС‹Рµ СЃР»РѕРё",
+        energy: { label: "РЈСЂРѕРІРµРЅСЊ СЌРЅРµСЂРіРёРё" }
       },
       pregnancyPlanning: {
-        title: "Контекст планирования",
-        description: "Для деликатного диалога",
-        support: { label: "Какой уровень поддержки есть?" }
+        title: "РљРѕРЅС‚РµРєСЃС‚ РїР»Р°РЅРёСЂРѕРІР°РЅРёСЏ",
+        description: "Р”Р»СЏ РґРµР»РёРєР°С‚РЅРѕРіРѕ РґРёР°Р»РѕРіР°",
+        support: { label: "РљР°РєРѕР№ СѓСЂРѕРІРµРЅСЊ РїРѕРґРґРµСЂР¶РєРё РµСЃС‚СЊ?" }
       }
     },
     templates: {
       triadInsight: {
-        title: "Триада знакомства",
-        description: "Оценка взаимности и перспектив"
+        title: "РўСЂРёР°РґР° Р·РЅР°РєРѕРјСЃС‚РІР°",
+        description: "РћС†РµРЅРєР° РІР·Р°РёРјРЅРѕСЃС‚Рё Рё РїРµСЂСЃРїРµРєС‚РёРІ"
       },
       crossroads: {
-        title: "Перекрёсток",
-        description: "Про прошлое, настоящее и путь вперёд"
+        title: "РџРµСЂРµРєСЂС‘СЃС‚РѕРє",
+        description: "РџСЂРѕ РїСЂРѕС€Р»РѕРµ, РЅР°СЃС‚РѕСЏС‰РµРµ Рё РїСѓС‚СЊ РІРїРµСЂС‘Рґ"
       },
       careerLadder: {
-        title: "Лестница роста",
-        description: "Перспективы карьеры"
+        title: "Р›РµСЃС‚РЅРёС†Р° СЂРѕСЃС‚Р°",
+        description: "РџРµСЂСЃРїРµРєС‚РёРІС‹ РєР°СЂСЊРµСЂС‹"
       },
       flow: {
-        title: "Финансовый поток",
-        description: "Баланс ресурсов"
+        title: "Р¤РёРЅР°РЅСЃРѕРІС‹Р№ РїРѕС‚РѕРє",
+        description: "Р‘Р°Р»Р°РЅСЃ СЂРµСЃСѓСЂСЃРѕРІ"
       },
       duality: {
-        title: "Дуальность",
-        description: "Сравнение вариантов"
+        title: "Р”СѓР°Р»СЊРЅРѕСЃС‚СЊ",
+        description: "РЎСЂР°РІРЅРµРЅРёРµ РІР°СЂРёР°РЅС‚РѕРІ"
       },
       waves: {
-        title: "Волны недели",
-        description: "Ежедневный прогноз"
+        title: "Р’РѕР»РЅС‹ РЅРµРґРµР»Рё",
+        description: "Р•Р¶РµРґРЅРµРІРЅС‹Р№ РїСЂРѕРіРЅРѕР·"
       },
       pulse: {
-        title: "Пульс",
-        description: "Тонус и ресурсы"
+        title: "РџСѓР»СЊСЃ",
+        description: "РўРѕРЅСѓСЃ Рё СЂРµСЃСѓСЂСЃС‹"
       },
       nurture: {
-        title: "Забота",
-        description: "Поддержка при планировании"
+        title: "Р—Р°Р±РѕС‚Р°",
+        description: "РџРѕРґРґРµСЂР¶РєР° РїСЂРё РїР»Р°РЅРёСЂРѕРІР°РЅРёРё"
       }
     },
     ui: {
-      exploreSections: "Выберите направление",
-      viewSubcategories: "Перейти",
-      startQuestionnaire: "Ответить на вопросы",
-      beginSpread: "Начать расклад",
-      drawCards: "Вытянуть карты",
-      interpret: "Получить интерпретацию",
-      factorsTab: "Пояснения факторов",
-      adviceTab: "Совет",
-      meaningTab: "Смысл",
+      exploreSections: "Р’С‹Р±РµСЂРёС‚Рµ РЅР°РїСЂР°РІР»РµРЅРёРµ",
+      viewSubcategories: "РџРµСЂРµР№С‚Рё",
+      startQuestionnaire: "РћС‚РІРµС‚РёС‚СЊ РЅР° РІРѕРїСЂРѕСЃС‹",
+      beginSpread: "РќР°С‡Р°С‚СЊ СЂР°СЃРєР»Р°Рґ",
+      drawCards: "Р’С‹С‚СЏРЅСѓС‚СЊ РєР°СЂС‚С‹",
+      interpret: "РџРѕР»СѓС‡РёС‚СЊ РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёСЋ",
+      factorsTab: "РџРѕСЏСЃРЅРµРЅРёСЏ С„Р°РєС‚РѕСЂРѕРІ",
+      adviceTab: "РЎРѕРІРµС‚",
+      meaningTab: "РЎРјС‹СЃР»",
       artifacts: {
-        title: "Артефакты",
-        subtitle: "Коллекция эффектов и пассивов"
+        title: "РђСЂС‚РµС„Р°РєС‚С‹",
+        subtitle: "РљРѕР»Р»РµРєС†РёСЏ СЌС„С„РµРєС‚РѕРІ Рё РїР°СЃСЃРёРІРѕРІ"
       },
       achievements: {
-        title: "Достижения",
-        subtitle: "Цели для вдохновения"
+        title: "Р”РѕСЃС‚РёР¶РµРЅРёСЏ",
+        subtitle: "Р¦РµР»Рё РґР»СЏ РІРґРѕС…РЅРѕРІРµРЅРёСЏ"
       },
       spread: {
-        title: "Итог расклада",
-        subtitle: "Анимация выкладки и итоговые данные."
+        title: "РС‚РѕРі СЂР°СЃРєР»Р°РґР°",
+        subtitle: "РђРЅРёРјР°С†РёСЏ РІС‹РєР»Р°РґРєРё Рё РёС‚РѕРіРѕРІС‹Рµ РґР°РЅРЅС‹Рµ."
       }
     },
     artifacts: {
       constellationGlow: {
-        name: "Сияние созвездий",
-        description: "Свечение для стола и карт"
+        name: "РЎРёСЏРЅРёРµ СЃРѕР·РІРµР·РґРёР№",
+        description: "РЎРІРµС‡РµРЅРёРµ РґР»СЏ СЃС‚РѕР»Р° Рё РєР°СЂС‚"
       },
       starfallTrail: {
-        name: "След звездопада",
-        description: "Эффект метеоров при перетасовке"
+        name: "РЎР»РµРґ Р·РІРµР·РґРѕРїР°РґР°",
+        description: "Р­С„С„РµРєС‚ РјРµС‚РµРѕСЂРѕРІ РїСЂРё РїРµСЂРµС‚Р°СЃРѕРІРєРµ"
       },
       mysticFrame: {
-        name: "Мистическая рамка",
-        description: "Оформление аналитики"
+        name: "РњРёСЃС‚РёС‡РµСЃРєР°СЏ СЂР°РјРєР°",
+        description: "РћС„РѕСЂРјР»РµРЅРёРµ Р°РЅР°Р»РёС‚РёРєРё"
       },
       emberCards: {
-        name: "Тлеющие карты",
-        description: "Огненный стиль рубашек"
+        name: "РўР»РµСЋС‰РёРµ РєР°СЂС‚С‹",
+        description: "РћРіРЅРµРЅРЅС‹Р№ СЃС‚РёР»СЊ СЂСѓР±Р°С€РµРє"
       },
       auroraBackdrop: {
-        name: "Северное сияние",
-        description: "Фон для раскладов"
+        name: "РЎРµРІРµСЂРЅРѕРµ СЃРёСЏРЅРёРµ",
+        description: "Р¤РѕРЅ РґР»СЏ СЂР°СЃРєР»Р°РґРѕРІ"
       },
       chorusBells: {
-        name: "Хор колокольчиков",
-        description: "Звуки при открытии карт"
+        name: "РҐРѕСЂ РєРѕР»РѕРєРѕР»СЊС‡РёРєРѕРІ",
+        description: "Р—РІСѓРєРё РїСЂРё РѕС‚РєСЂС‹С‚РёРё РєР°СЂС‚"
       },
       luminaPointer: {
-        name: "Светящийся курсор",
-        description: "Подсветка при наведении"
+        name: "РЎРІРµС‚СЏС‰РёР№СЃСЏ РєСѓСЂСЃРѕСЂ",
+        description: "РџРѕРґСЃРІРµС‚РєР° РїСЂРё РЅР°РІРµРґРµРЅРёРё"
       },
       focusTotem: {
-        name: "Тотем фокуса",
-        description: "Снижает кулдаун на сессии"
+        name: "РўРѕС‚РµРј С„РѕРєСѓСЃР°",
+        description: "РЎРЅРёР¶Р°РµС‚ РєСѓР»РґР°СѓРЅ РЅР° СЃРµСЃСЃРёРё"
       },
       whisperCodex: {
-        name: "Шепчущий кодекс",
-        description: "Усиленные интерпретации"
+        name: "РЁРµРїС‡СѓС‰РёР№ РєРѕРґРµРєСЃ",
+        description: "РЈСЃРёР»РµРЅРЅС‹Рµ РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёРё"
       },
       fortuneCompass: {
-        name: "Компас удачи",
-        description: "Больше наград за завершение"
+        name: "РљРѕРјРїР°СЃ СѓРґР°С‡Рё",
+        description: "Р‘РѕР»СЊС€Рµ РЅР°РіСЂР°Рґ Р·Р° Р·Р°РІРµСЂС€РµРЅРёРµ"
       },
       veilGuard: {
-        name: "Страж завесы",
-        description: "Дополнительная защита от фрода"
+        name: "РЎС‚СЂР°Р¶ Р·Р°РІРµСЃС‹",
+        description: "Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅР°СЏ Р·Р°С‰РёС‚Р° РѕС‚ С„СЂРѕРґР°"
       },
       echoCharm: {
-        name: "Амулет эха",
-        description: "Повышенная сила последовательных карт"
+        name: "РђРјСѓР»РµС‚ СЌС…Р°",
+        description: "РџРѕРІС‹С€РµРЅРЅР°СЏ СЃРёР»Р° РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅС‹С… РєР°СЂС‚"
       },
       pulseAnchor: {
-        name: "Якорь пульса",
-        description: "Замедляет спад энергии"
+        name: "РЇРєРѕСЂСЊ РїСѓР»СЊСЃР°",
+        description: "Р—Р°РјРµРґР»СЏРµС‚ СЃРїР°Рґ СЌРЅРµСЂРіРёРё"
       },
       clarityRune: {
-        name: "Руна ясности",
-        description: "Чёткость советов"
+        name: "Р СѓРЅР° СЏСЃРЅРѕСЃС‚Рё",
+        description: "Р§С‘С‚РєРёРµ СЃРѕРІРµС‚С‹"
       }
     },
     achievements: {
       streakThree: {
-        name: "Три в ряд",
-        description: "Завершите три расклада подряд"
+        name: "РўСЂРё РІ СЂСЏРґ",
+        description: "Р—Р°РІРµСЂС€РёС‚Рµ С‚СЂРё СЂР°СЃРєР»Р°РґР° РїРѕРґСЂСЏРґ"
       },
       artifactMaster: {
-        name: "Мастер артефактов",
-        description: "Откройте 10 улучшений"
+        name: "РњР°СЃС‚РµСЂ Р°СЂС‚РµС„Р°РєС‚РѕРІ",
+        description: "РћС‚РєСЂРѕР№С‚Рµ 10 СѓР»СѓС‡С€РµРЅРёР№"
       },
       socialButterfly: {
-        name: "Социальная бабочка",
-        description: "Поделитесь с пятью друзьями"
+        name: "РЎРѕС†РёР°Р»СЊРЅР°СЏ Р±Р°Р±РѕС‡РєР°",
+        description: "РџРѕРґРµР»РёС‚РµСЃСЊ СЃ РїСЏС‚СЊСЋ РґСЂСѓР·СЊСЏРјРё"
       }
     }
   },
@@ -336,7 +340,7 @@ export const resources: Record<Locale, TranslationTree> = {
         intent: { label: "What do you want to clarify?" },
         frequency: {
           label: "How often do you talk?",
-          helper: "0 — rarely, 10 — daily"
+          helper: "0 вЂ” rarely, 10 вЂ” daily"
         }
       },
       longTerm: {
@@ -511,9 +515,9 @@ export const resources: Record<Locale, TranslationTree> = {
   }
 };
 
-export const translate = (locale: Locale, key: string): string => {
+export const translate = (locale: SupportedLocale, key: string): string => {
   const segments = key.split(".");
-  let current: unknown = resources[locale];
+  let current: unknown = resources[locale] ?? resources[DEFAULT_LOCALE];
 
   for (const segment of segments) {
     if (typeof current !== "object" || current === null || !(segment in (current as Record<string, unknown>))) {
@@ -524,3 +528,4 @@ export const translate = (locale: Locale, key: string): string => {
 
   return typeof current === "string" ? current : key;
 };
+

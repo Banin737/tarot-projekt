@@ -1,13 +1,11 @@
-﻿import { ACHIEVEMENTS } from "@/lib/constants/achievements";
+import { ACHIEVEMENTS } from "@/lib/constants/achievements";
 import { cookies } from "next/headers";
 import { translate } from "@/lib/i18n/resources";
-
-const DEFAULT_LOCALE = "ru";
-type Locale = "ru" | "en";
+import { DEFAULT_LOCALE, type SupportedLocale } from "@/lib/i18n/config";
 
 export default async function AchievementsPage() {
   const cookieStore = await cookies();
-  const locale = (cookieStore.get("locale")?.value ?? DEFAULT_LOCALE) as Locale;
+  const locale = (cookieStore.get("locale")?.value ?? DEFAULT_LOCALE) as SupportedLocale;
 
   return (
     <main className="mx-auto flex max-w-4xl flex-col gap-6 px-6 py-12">
@@ -31,3 +29,4 @@ export default async function AchievementsPage() {
     </main>
   );
 }
+

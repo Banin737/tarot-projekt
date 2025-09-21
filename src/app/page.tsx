@@ -1,14 +1,12 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { cookies } from "next/headers";
 import { SECTION_CONFIG } from "@/lib/constants/sections";
 import { translate } from "@/lib/i18n/resources";
-
-const DEFAULT_LOCALE = "ru";
-type Locale = "ru" | "en";
+import { DEFAULT_LOCALE, type SupportedLocale } from "@/lib/i18n/config";
 
 export default async function HomePage() {
   const cookieStore = await cookies();
-  const locale = (cookieStore.get("locale")?.value ?? DEFAULT_LOCALE) as Locale;
+  const locale = (cookieStore.get("locale")?.value ?? DEFAULT_LOCALE) as SupportedLocale;
 
   return (
     <main className="mx-auto flex max-w-5xl flex-col gap-8 px-6 py-12">
@@ -56,3 +54,4 @@ export default async function HomePage() {
     </main>
   );
 }
+

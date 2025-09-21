@@ -1,25 +1,24 @@
 "use client";
 
 import { createContext, useContext, useMemo } from "react";
-import { resources, translate, type Locale } from "./resources";
+import { DEFAULT_LOCALE, type SupportedLocale } from "./config";
+import { translate } from "./resources";
 
 type I18nContextValue = {
-  locale: Locale;
+  locale: SupportedLocale;
   t: (key: string) => string;
 };
 
-const defaultLocale: Locale = "ru";
-
 const I18nContext = createContext<I18nContextValue>({
-  locale: defaultLocale,
-  t: (key: string) => translate(defaultLocale, key),
+  locale: DEFAULT_LOCALE,
+  t: (key: string) => translate(DEFAULT_LOCALE, key),
 });
 
 export const I18nProvider = ({
-  locale = defaultLocale,
+  locale = DEFAULT_LOCALE,
   children,
 }: {
-  locale?: Locale;
+  locale?: SupportedLocale;
   children: React.ReactNode;
 }) => {
   const value = useMemo<I18nContextValue>(
@@ -34,4 +33,3 @@ export const I18nProvider = ({
 };
 
 export const useTranslation = () => useContext(I18nContext);
-export { resources };
