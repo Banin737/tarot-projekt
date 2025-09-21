@@ -1,0 +1,46 @@
+[
+  {
+    "card_id": "tower",
+    "card_name": "The Tower",
+    "arcana": "major",
+    "sphere_context": "crisis",
+    "layout_type": "negative",
+    "meaning_up": "Sudden disruption that clears illusions.",
+    "meaning_rev": "Lingering collapse due to resistance.",
+    "advice_potential": "Embrace change; rebuild with honesty.",
+    "notes": "High negative polarity"
+  },
+  {
+    "card_id": "fool",
+    "card_name": "The Fool",
+    "arcana": "major",
+    "sphere_context": "beginnings",
+    "layout_type": "positive",
+    "meaning_up": "Innocent leap forward.",
+    "meaning_rev": "Naivety causing missteps.",
+    "advice_potential": "Stay curious but anchor in reality.",
+    "notes": "Neutral unless influenced"
+  },
+  {
+    "card_id": "ace_of_cups",
+    "card_name": "Ace of Cups",
+    "arcana": "minor",
+    "sphere_context": "relationships",
+    "layout_type": "positive",
+    "meaning_up": "Overflowing emotional renewal.",
+    "meaning_rev": "Blocked feelings; emotional drought.",
+    "advice_potential": "Share feelings openly.",
+    "notes": ""
+  },
+  {
+    "card_id": "three_of_swords",
+    "card_name": "Three of Swords",
+    "arcana": "minor",
+    "sphere_context": "relationships",
+    "layout_type": "negative",
+    "meaning_up": "Heartbreak and piercing truths.",
+    "meaning_rev": "Delayed healing, lingering wounds.",
+    "advice_potential": "Allow yourself to grieve.",
+    "notes": "Sensitive to Tower influence"
+  }
+]

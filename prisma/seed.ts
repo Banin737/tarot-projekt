@@ -1,4 +1,4 @@
-import { PrismaClient, LayoutType, ArcanaType, ArtifactCategory, SpreadRole, QuestionnaireInputType } from "@prisma/client";
+﻿import { PrismaClient, LayoutType, ArcanaType, ArtifactCategory, SpreadRole, QuestionnaireInputType } from "@prisma/client";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -494,7 +494,7 @@ const artifactSeeds = {
 const levels = Array.from({ length: 20 }, (_, idx) => idx + 1);
 
 const readCards = (): RawCardMeaning[] => {
-  const filePath = path.resolve(__dirname, "..", "..", "data", "cards_meanings.json");
+  const filePath = path.resolve(__dirname, "..", "data", "cards_meanings.json");
   if (!fs.existsSync(filePath)) {
     throw new Error(`Card meanings file is missing at ${filePath}`);
   }
